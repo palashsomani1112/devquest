@@ -189,7 +189,7 @@ pre .c{color:#6B7694;} /* comment tint used in lesson samples */
 #hud{ padding-top:calc(10px + env(safe-area-inset-top)); padding-right:calc(14px + env(safe-area-inset-right)); padding-left:calc(14px + env(safe-area-inset-left)); }
 
 /* ---------- small screens: compact HUD + a duel sheet that leaves the fight visible ---------- */
-@media (max-width:640px){
+@media (max-width:899px){
   #hud{ padding:calc(6px + env(safe-area-inset-top)) calc(8px + env(safe-area-inset-right)) 6px calc(8px + env(safe-area-inset-left)); }
   .hud-left{ gap:4px; min-width:0; }
   .hud-chip{ padding:5px 8px; border-radius:8px; }
@@ -203,31 +203,37 @@ pre .c{color:#6B7694;} /* comment tint used in lesson samples */
   .overlay{ padding:10px; }
   .overlay.duel{ padding:8px; }
   /* quiz sheet: tall enough that the question + all answers fit, no scrolling */
-  #quiz-overlay.duel .panel{ max-height:64vh; max-height:64dvh; }
+  #quiz-overlay.duel .panel{ max-height:74vh; max-height:74dvh; }
   #quiz-overlay .panel-head{ padding:9px 14px 7px; }
   #quiz-overlay .panel-title{ font-size:15px; }
   #quiz-overlay .panel-eyebrow{ font-size:9px; letter-spacing:.14em; }
   .quiz-combat{ font-size:10.5px; }
   #quiz-body{ padding:10px 12px; font-size:13px; }
   #quiz-body p{ margin:0 0 8px; }
-  .quiz-opt{ padding:9px 11px; font-size:13px; margin-bottom:5px; border-radius:10px; }
+  .quiz-opt{ padding:8px 10px; font-size:13px; margin-bottom:5px; border-radius:10px; }
   .qe-verdict{ font-size:13.5px; margin-bottom:6px; }
   .qe-why{ font-size:12.5px; line-height:1.5; }
   .qe-fact{ font-size:11.5px; margin-top:7px; padding-top:7px; }
   .qe-next{ margin-top:8px; }
-  /* boss fight: the coding task takes the entire screen */
-  #battle-overlay.duel{ padding:0; }
-  #battle-overlay.duel .panel{ width:100%; max-width:none; height:100dvh; max-height:100dvh; border-radius:0; border-left:0; border-right:0; }
-  #battle-overlay .panel-head{ padding:calc(10px + env(safe-area-inset-top)) 14px 8px; }
-  #battle-overlay .panel-body{ display:flex; flex-direction:column; }
-  #battle-overlay .ide{ flex:1; display:flex; flex-direction:column; min-height:170px; }
-  #battle-overlay .ide-body{ flex:1; }
+  /* boss IDE: a bottom sheet like the quiz — the fight stays visible above it */
+  #battle-overlay.duel{ padding:8px; }
+  #battle-overlay.duel .panel{ max-height:72vh; max-height:72dvh; }
+  #battle-overlay .panel-head{ padding:9px 14px 7px; }
+  #battle-overlay .panel-title{ font-size:16px; }
+  #battle-overlay .panel-body{ display:flex; flex-direction:column; min-height:0; }
+  #battle-overlay .ide{ flex:1 1 auto; display:flex; flex-direction:column; min-height:110px; }
+  #battle-overlay .ide-body{ flex:1; min-height:0; }
   #battle-overlay .ide-gutter, #battle-overlay .ide-scroll{ height:auto; }
-  #battle-overlay .panel-foot{ padding:10px 14px calc(12px + env(safe-area-inset-bottom)); }
+  #battle-overlay .panel-foot{ padding:8px 12px 10px; }
+  #battle-challenge{ font-size:12.5px; }
+  /* code blocks compress hard on phones so full questions fit without scrolling */
+  #quiz-body pre, #battle-overlay pre{ font-size:10.5px; line-height:1.4; padding:7px 9px; margin:6px 0 8px; }
+  #quiz-body{ padding:8px 12px 6px; }
+  .quiz-opt{ line-height:1.3; }
+  #quiz-opts .quiz-opt:last-child{ margin-bottom:0; }
   .panel{ border-radius:13px; }
   .panel-body{ padding:12px 14px; font-size:13.5px; }
   .btn{ padding:9px 14px; font-size:13.5px; border-radius:10px; }
-  .quiz-opt{ padding:10px 12px; font-size:13.5px; margin-bottom:6px; }
   .ide-gutter, .ide-scroll{ height:128px; }
   .ide-highlight, #code-editor, .ide-gutter{ font-size:11.5px; }
   #toast-stack{ top:calc(8px + env(safe-area-inset-top)); right:8px; max-width:72vw; }
@@ -3621,7 +3627,7 @@ const Engine = {
       active: true, zoneIndex: zoneIndex, enemy: enemy, enemyCore: core, enemyJaw: jaw,
       enemyFaceY: faceY, isBoss: !!opts.isBoss,
       enemyHome: enemy.position.clone(), maxHP: opts.maxHP || 3,
-      camOffsetX: big ? 2.2 : 0, camZBase: big ? 10 : 12.5, lookY: big ? 1.4 : -2.4, camZOff: 0, gap: GAP, charge: 0, pdx: 0, pdy: 0, edx: 0, edy: 0
+      camOffsetX: big ? 2.2 : 0, camZBase: big ? 10 : 12.5, lookY: big ? 1.4 : -3.1, camZOff: 0, gap: GAP, charge: 0, pdx: 0, pdy: 0, edx: 0, edy: 0
     };
     if (!opts.isBoss) Sound.play('encounter');
   },
